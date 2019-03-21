@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Test {
 
@@ -26,7 +27,7 @@ public class Test {
 	}
 
 	public static List<Apple> filterApples(List<Apple> inventory,
-			ApplePredicate p) {
+			Predicate<Apple> p) {
 		List<Apple> result = new ArrayList<>();
 		for (Apple apple : inventory) {
 			if (p.test(apple)) {
