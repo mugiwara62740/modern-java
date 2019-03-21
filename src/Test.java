@@ -26,12 +26,12 @@ public class Test {
 				"Après filtrage > 26 g : " + listeFiltreesParPoid.toString());
 	}
 
-	public static List<Apple> filterApples(List<Apple> inventory,
-			Predicate<Apple> p) {
-		List<Apple> result = new ArrayList<>();
-		for (Apple apple : inventory) {
-			if (p.test(apple)) {
-				result.add(apple);
+	public static <T> List<T> filterApples(List<T> inventory,
+			Predicate<T> predicat) {
+		List<T> result = new ArrayList<>();
+		for (T item : inventory) {
+			if (predicat.test(item)) {
+				result.add(item);
 			}
 		}
 		return result;
