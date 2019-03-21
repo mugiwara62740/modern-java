@@ -14,20 +14,18 @@ public class Test {
 
 		List<Apple> inventory = new ArrayList<Apple>(
 				Arrays.asList(a, b, c, d, e));
+		List<Integer> numbers = new ArrayList<Integer>(
+				Arrays.asList(1, 12, 13, 1234, 122));
 		System.out.println("Avant filtrage : " + inventory.toString());
-		List<Apple> listeFiltreesGreen = filterApples(inventory,
-				(Apple apple) -> Color.GREEN.equals(apple.getColor()));
-
-		List<Apple> listeFiltreesParPoid = filterApples(inventory,
-				(Apple apple) -> apple.getWeight() > 26);
+		List<Apple> redApples = filter(inventory,
+				(Apple apple) -> Color.RED.equals(apple.getColor()));
+		List<Integer> evenNumbers = filter(numbers, (Integer i) -> i % 2 == 0);
+		System.out.println("Après filtrage Rouge : " + redApples.toString());
 		System.out.println(
-				"Après filtrage Vert : " + listeFiltreesGreen.toString());
-		System.out.println(
-				"Après filtrage > 26 g : " + listeFiltreesParPoid.toString());
+				"Après filtrage Nombre Pair: " + evenNumbers.toString());
 	}
 
-	public static <T> List<T> filterApples(List<T> inventory,
-			Predicate<T> predicat) {
+	public static <T> List<T> filter(List<T> inventory, Predicate<T> predicat) {
 		List<T> result = new ArrayList<>();
 		for (T item : inventory) {
 			if (predicat.test(item)) {
