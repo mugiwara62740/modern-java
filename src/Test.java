@@ -14,14 +14,21 @@ public class Test {
 		List<Apple> inventory = new ArrayList<Apple>(
 				Arrays.asList(a, b, c, d, e));
 		System.out.println("Avant filtrage : " + inventory.toString());
-		List<Apple> listeFiltrees = filterGreenApples(inventory);
-		System.out.println("Après filtrage : " + listeFiltrees.toString());
+		List<Apple> listeFiltreesGreen = filterApplesByColor(inventory,
+				Color.GREEN);
+		List<Apple> listeFiltreesRed = filterApplesByColor(inventory,
+				Color.RED);
+		System.out.println(
+				"Après filtrage Vert : " + listeFiltreesGreen.toString());
+		System.out.println(
+				"Après filtrage Rouge : " + listeFiltreesRed.toString());
 	}
 
-	public static List<Apple> filterGreenApples(List<Apple> inventory) {
+	public static List<Apple> filterApplesByColor(List<Apple> inventory,
+			Color color) {
 		List<Apple> result = new ArrayList<>();
 		for (Apple apple : inventory) {
-			if (Color.GREEN.equals(apple.getColor())) {
+			if (color.equals(apple.getColor())) {
 				result.add(apple);
 			}
 		}
