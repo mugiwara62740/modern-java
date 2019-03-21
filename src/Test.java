@@ -35,6 +35,16 @@ public class Test {
 		System.out.println("Après comparaison poids: " + inventory.toString());
 
 		System.out.println("Après comparaison Numbers: " + numbers.toString());
+
+		Thread t1 = new Thread(new Runnable() {
+			public void run() {
+				System.out.println("Hello world 1");
+			}
+		});
+		t1.run();
+
+		Thread t2 = new Thread(() -> System.out.println("Hello world 2"));
+		t2.run();
 	}
 
 	public static <T> List<T> filter(List<T> inventory, Predicate<T> predicat) {
