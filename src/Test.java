@@ -14,12 +14,21 @@ public class Test {
 		List<Apple> inventory = new ArrayList<Apple>(
 				Arrays.asList(a, b, c, d, e));
 		System.out.println("Avant filtrage : " + inventory.toString());
-		AppleGreenColorPredicate greenColourPredicate = new AppleGreenColorPredicate();
-		AppleHeavyWeightPredicate heavyWeightPredicate = new AppleHeavyWeightPredicate();
 		List<Apple> listeFiltreesGreen = filterApples(inventory,
-				greenColourPredicate);
+				new ApplePredicate() {
+					@Override
+					public boolean test(Apple apple) {
+						return Color.GREEN.equals(apple.getColor());
+					}
+				});
+
 		List<Apple> listeFiltreesParPoid = filterApples(inventory,
-				heavyWeightPredicate);
+				new ApplePredicate() {
+					@Override
+					public boolean test(Apple apple) {
+						return apple.getWeight() > 26;
+					}
+				});
 		System.out.println(
 				"Après filtrage Vert : " + listeFiltreesGreen.toString());
 		System.out.println(
