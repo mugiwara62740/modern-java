@@ -14,47 +14,23 @@ public class Test {
 		List<Apple> inventory = new ArrayList<Apple>(
 				Arrays.asList(a, b, c, d, e));
 		System.out.println("Avant filtrage : " + inventory.toString());
-		List<Apple> listeFiltreesGreen = filterApples(inventory, Color.GREEN, 0,
-				true);
-		List<Apple> listeFiltreesRed = filterApples(inventory, Color.RED, 0,
-				true);
-		List<Apple> listeFiltreesParPoid = filterApples(inventory, null, 26,
-				false);
+		AppleGreenColorPredicate greenColourPredicate = new AppleGreenColorPredicate();
+		AppleHeavyWeightPredicate heavyWeightPredicate = new AppleHeavyWeightPredicate();
+		List<Apple> listeFiltreesGreen = filterApples(inventory,
+				greenColourPredicate);
+		List<Apple> listeFiltreesParPoid = filterApples(inventory,
+				heavyWeightPredicate);
 		System.out.println(
 				"Après filtrage Vert : " + listeFiltreesGreen.toString());
-		System.out.println(
-				"Après filtrage Rouge : " + listeFiltreesRed.toString());
 		System.out.println(
 				"Après filtrage > 26 g : " + listeFiltreesParPoid.toString());
 	}
 
-	public static List<Apple> filterApplesByColor(List<Apple> inventory,
-			Color color) {
+	public static List<Apple> filterApples(List<Apple> inventory,
+			ApplePredicate p) {
 		List<Apple> result = new ArrayList<>();
 		for (Apple apple : inventory) {
-			if (color.equals(apple.getColor())) {
-				result.add(apple);
-			}
-		}
-		return result;
-	}
-
-	public static List<Apple> filterApplesByWeight(List<Apple> inventory,
-			int weight) {
-		List<Apple> result = new ArrayList<>();
-		for (Apple apple : inventory) {
-			if (apple.getWeight() > weight) {
-				result.add(apple);
-			}
-		}
-		return result;
-	}
-	public static List<Apple> filterApples(List<Apple> inventory, Color color,
-			int weight, boolean flagColourFilter) {
-		List<Apple> result = new ArrayList<>();
-		for (Apple apple : inventory) {
-			if ((flagColourFilter && apple.getColor().equals(color))
-					|| (!flagColourFilter && apple.getWeight() > weight)) {
+			if (p.test(apple)) {
 				result.add(apple);
 			}
 		}
