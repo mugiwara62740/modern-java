@@ -18,10 +18,13 @@ public class Test {
 				Color.GREEN);
 		List<Apple> listeFiltreesRed = filterApplesByColor(inventory,
 				Color.RED);
+		List<Apple> listeFiltreesParPoid = filterApplesByWeight(inventory, 26);
 		System.out.println(
 				"Après filtrage Vert : " + listeFiltreesGreen.toString());
 		System.out.println(
 				"Après filtrage Rouge : " + listeFiltreesRed.toString());
+		System.out.println(
+				"Après filtrage > 26 g : " + listeFiltreesParPoid.toString());
 	}
 
 	public static List<Apple> filterApplesByColor(List<Apple> inventory,
@@ -29,6 +32,17 @@ public class Test {
 		List<Apple> result = new ArrayList<>();
 		for (Apple apple : inventory) {
 			if (color.equals(apple.getColor())) {
+				result.add(apple);
+			}
+		}
+		return result;
+	}
+
+	public static List<Apple> filterApplesByWeight(List<Apple> inventory,
+			int weight) {
+		List<Apple> result = new ArrayList<>();
+		for (Apple apple : inventory) {
+			if (apple.getWeight() > weight) {
 				result.add(apple);
 			}
 		}
