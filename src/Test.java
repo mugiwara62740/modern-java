@@ -15,20 +15,10 @@ public class Test {
 				Arrays.asList(a, b, c, d, e));
 		System.out.println("Avant filtrage : " + inventory.toString());
 		List<Apple> listeFiltreesGreen = filterApples(inventory,
-				new ApplePredicate() {
-					@Override
-					public boolean test(Apple apple) {
-						return Color.GREEN.equals(apple.getColor());
-					}
-				});
+				(Apple apple) -> Color.GREEN.equals(apple.getColor()));
 
 		List<Apple> listeFiltreesParPoid = filterApples(inventory,
-				new ApplePredicate() {
-					@Override
-					public boolean test(Apple apple) {
-						return apple.getWeight() > 26;
-					}
-				});
+				(Apple apple) -> apple.getWeight() > 26);
 		System.out.println(
 				"Après filtrage Vert : " + listeFiltreesGreen.toString());
 		System.out.println(
