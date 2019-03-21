@@ -14,11 +14,12 @@ public class Test {
 		List<Apple> inventory = new ArrayList<Apple>(
 				Arrays.asList(a, b, c, d, e));
 		System.out.println("Avant filtrage : " + inventory.toString());
-		List<Apple> listeFiltreesGreen = filterApplesByColor(inventory,
-				Color.GREEN);
-		List<Apple> listeFiltreesRed = filterApplesByColor(inventory,
-				Color.RED);
-		List<Apple> listeFiltreesParPoid = filterApplesByWeight(inventory, 26);
+		List<Apple> listeFiltreesGreen = filterApples(inventory, Color.GREEN, 0,
+				true);
+		List<Apple> listeFiltreesRed = filterApples(inventory, Color.RED, 0,
+				true);
+		List<Apple> listeFiltreesParPoid = filterApples(inventory, null, 26,
+				false);
 		System.out.println(
 				"Après filtrage Vert : " + listeFiltreesGreen.toString());
 		System.out.println(
@@ -43,6 +44,17 @@ public class Test {
 		List<Apple> result = new ArrayList<>();
 		for (Apple apple : inventory) {
 			if (apple.getWeight() > weight) {
+				result.add(apple);
+			}
+		}
+		return result;
+	}
+	public static List<Apple> filterApples(List<Apple> inventory, Color color,
+			int weight, boolean flagColourFilter) {
+		List<Apple> result = new ArrayList<>();
+		for (Apple apple : inventory) {
+			if ((flagColourFilter && apple.getColor().equals(color))
+					|| (!flagColourFilter && apple.getWeight() > weight)) {
 				result.add(apple);
 			}
 		}
