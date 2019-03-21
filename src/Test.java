@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,9 +21,20 @@ public class Test {
 		List<Apple> redApples = filter(inventory,
 				(Apple apple) -> Color.RED.equals(apple.getColor()));
 		List<Integer> evenNumbers = filter(numbers, (Integer i) -> i % 2 == 0);
+		inventory.sort(new Comparator<Apple>() {
+			public int compare(Apple a1, Apple a2) {
+				return a1.getWeight().compareTo(a2.getWeight());
+			}
+
+		});
+
+		numbers.sort((Integer a1, Integer a2) -> a1.compareTo(a2));
 		System.out.println("Après filtrage Rouge : " + redApples.toString());
 		System.out.println(
 				"Après filtrage Nombre Pair: " + evenNumbers.toString());
+		System.out.println("Après comparaison poids: " + inventory.toString());
+
+		System.out.println("Après comparaison Numbers: " + numbers.toString());
 	}
 
 	public static <T> List<T> filter(List<T> inventory, Predicate<T> predicat) {
