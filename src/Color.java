@@ -1,4 +1,4 @@
 
 public enum Color {
-	RED, GREEN
+	RED, GREEN, BLUE
 }
